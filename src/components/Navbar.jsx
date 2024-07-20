@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom';
+import ProductContext from '../context/ProductContext';
 
-const Navbar = ({setProducts}) => {
+const Navbar = () => {
 
     const [value, setValue] = useState('');
+    const {setProducts, cart} = useContext(ProductContext);
 
   // Step 2: Create the onChange handler
   const handleChange = (e) => {
@@ -25,7 +27,8 @@ const Navbar = ({setProducts}) => {
       </div>
       <ul className='flex gap-5 text-xl font-bold'>
         <Link to ="/" className='text-black hover:text-gray-500'>Home</Link>
-        <Link to ="/cart" className='text-black hover:text-gray-500'>Cart</Link>
+        <Link to ="/cart" className='text-black hover:text-gray-500'>Cart
+        {!cart.length?"":`(${cart.length})` }</Link>
       </ul>
     </nav>
   )

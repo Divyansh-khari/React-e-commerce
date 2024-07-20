@@ -1,8 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {FadeLoader} from 'react-spinners'
+import ProductContext from '../context/ProductContext';
 
-const Home = ({products, setProducts}) => {
+const Home = () => {
   const [loading, setloading]= useState(true);
+  
+  const {products, setProducts, addToCart} = useContext(ProductContext);
+
   useEffect(()=>{
   getProducts();
   }, [])
@@ -31,7 +35,7 @@ const Home = ({products, setProducts}) => {
             <p className='text-sm'>{product.description}</p>
             <div className='flex justify-between'>
             <h3 className='font-bold text-gray-9000'>${product.price}</h3>
-            <button className='px-3 py-1 bg-black text-white font-bold '>Buy</button>
+            <button onClick= {()=> addToCart(product)} className='px-3 py-1 bg-black text-white font-bold '>Add to Cart</button>
             </div>
             </div>
           )
